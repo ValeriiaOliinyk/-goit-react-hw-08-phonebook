@@ -1,0 +1,19 @@
+@import 'styles/shared.scss';
+
+.User__btn {
+  outline: none;
+  border: none;
+  font-size: 14px;
+  height: 35px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: $main;
+  color: $white-color;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 250ms opacity linear;
+
+  &:hover {
+    opacity: 1;
+  }
+}

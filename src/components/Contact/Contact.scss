@@ -1,0 +1,13 @@
+@import 'styles/shared.scss';
+
+.Contact__btn {
+  display: block;
+  margin: auto;
+  cursor: pointer;
+}
+
+.Contact__text {
+  font-size: 20px;
+  color: $line-color;
+  font-weight: 600;
+}

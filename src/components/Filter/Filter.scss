@@ -1,0 +1,20 @@
+@import 'styles/shared.scss';
+
+.Filter__label {
+  font-size: 20px;
+  font-weight: 700;
+  color: $line-color;
+}
+
+.Filter__input {
+  outline: unset;
+  width: 250px;
+  height: 45px;
+  display: block;
+  margin: auto;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: 1px solid rgb(107, 110, 110);
+  border-radius: 30px;
+}

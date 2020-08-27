@@ -1,0 +1,16 @@
+@import 'styles/shared.scss';
+
+.Section__title {
+  text-align: center;
+  color: rgb(85, 158, 163);
+}
+
+.Section__box {
+  width: 400px;
+  padding: 30px 0;
+  margin: auto;
+  text-align: center;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.4);
+}

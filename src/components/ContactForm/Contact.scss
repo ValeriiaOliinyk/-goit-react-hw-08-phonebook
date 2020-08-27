@@ -1,0 +1,44 @@
+@import 'styles/shared.scss';
+
+.Form__label {
+  display: block;
+  margin-top: 10px;
+}
+
+.Form__input {
+  width: 250px;
+  height: 45px;
+  outline: unset;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid rgb(107, 110, 110);
+  border-radius: 30px;
+}
+
+.Form__btn {
+  outline: none;
+  border: none;
+  margin: auto;
+  display: block;
+  cursor: pointer;
+  border: 2px solid $hover-color;
+  background-color: $btn-color;
+  width: 120px;
+  height: 30px;
+  color: $white-color;
+  border-radius: 4px;
+  transition: background-color 250ms linear;
+
+  &:hover {
+    background-color: $btn-hover-color;
+  }
+}
+
+.Form__error {
+  font-size: 20px;
+  color: $error-color;
+  font-weight: 800;
+}

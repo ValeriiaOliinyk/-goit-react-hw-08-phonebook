@@ -1,0 +1,25 @@
+@import 'styles/shared.scss';
+
+.Contacts__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.Contacts__data {
+  display: block;
+  font-weight: 600;
+  font-size: 20px;
+  color: $main;
+}
+
+.Contacts__data:nth-child(2) {
+  margin-top: 20px;
+}
+
+.Contacts__zero {
+  font-weight: 800;
+  color: $main;
+  font-size: 18px;
+}

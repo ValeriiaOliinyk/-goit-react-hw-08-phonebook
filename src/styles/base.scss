@@ -1,0 +1,38 @@
+@import 'styles/shared';
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: $black;
+  line-height: 1.5;
+  font-family: $primary-font-stack;
+  background-color: rgb(46, 44, 44);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}

@@ -1,0 +1,31 @@
+@import 'styles/shared.scss';
+
+.Home__box {
+  height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home__container {
+  display: flex;
+  max-width: 600px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Home__title {
+  font-weight: 600;
+  font-size: 44px;
+  text-align: center;
+  color: $sign-color;
+}
+
+.Home__image {
+  width: 100px;
+  height: 100px;
+  background-image: url(../images/phonebook.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

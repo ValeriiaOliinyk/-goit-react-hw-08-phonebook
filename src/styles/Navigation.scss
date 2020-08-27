@@ -1,0 +1,14 @@
+@import 'styles/shared.scss';
+
+.Navigation__link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 700;
+  color: $border-color;
+  font-size: 18px;
+}
+
+.Navigation__active {
+  color: $main;
+}
