@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { authOperations } from '../redux/auth';
+import { useDispatch } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import Title from '../components/Title';
 import Button from '../components/Button';
@@ -9,14 +9,15 @@ import { Formik, ErrorMessage } from 'formik';
 import schema from '../helpers/validationLog';
 import '../styles/Login.scss';
 
-const LoginView = ({ onLogin }) => {
+const LoginView = () => {
+  const dispatch = useDispatch();
   return (
     <FormContainer>
       <Title text={'Sign in'} />
       <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={(data, { resetForm }) => {
-          onLogin(data);
+          dispatch(authOperations.logIn(data));
           resetForm({});
         }}
         validationSchema={schema}
@@ -57,8 +58,4 @@ const LoginView = ({ onLogin }) => {
   );
 };
 
-const mapDispatchToProps = {
-  onLogin: authOperations.logIn,
-};
-
-export default connect(null, mapDispatchToProps)(LoginView);
+export default LoginView;

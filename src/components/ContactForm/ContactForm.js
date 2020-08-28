@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { contactsOperations } from '../../redux/phonebook';
+import { useDispatch, useSelector } from 'react-redux';
 import './Contact.scss';
 
-const ContactForm = ({ contacts, onSubmit }) => {
+const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
+
+  const contacts = useSelector(state => state.contacts.contacts);
+  const dispatch = useDispatch();
 
   const updateContacts = e => {
     if (error) {
@@ -48,7 +51,7 @@ const ContactForm = ({ contacts, onSubmit }) => {
       reset();
       return;
     }
-    onSubmit(name, number);
+    dispatch(contactsOperations.addContact({ name, number }));
     reset();
   };
 
@@ -89,13 +92,4 @@ const ContactForm = ({ contacts, onSubmit }) => {
   );
 };
 
-const mapStateToProps = ({ contacts: { contacts } }) => ({
-  contacts,
-});
-
-const mapDispatchToProps = dispatch => ({
-  onSubmit: (name, number) =>
-    dispatch(contactsOperations.addContact({ name, number })),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
+export default ContactForm;

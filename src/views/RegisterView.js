@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth';
 import FormContainer from '../components/FormContainer';
 import Title from '../components/Title';
@@ -10,13 +10,14 @@ import BasicFormSchema from '../helpers/validation';
 import '../styles/Register.scss';
 
 const RegisterView = () => {
+  const dispatch = useDispatch();
   return (
     <FormContainer>
       <Title text={'Sign up'} />
       <Formik
         initialValues={{ email: '', password: '', name: '' }}
         onSubmit={(data, { resetForm }) => {
-          this.props.onRegister(data);
+          dispatch(authOperations.register(data));
           resetForm({});
         }}
         validationSchema={BasicFormSchema}
@@ -68,8 +69,4 @@ const RegisterView = () => {
   );
 };
 
-const mapDispatchToProps = {
-  onRegister: authOperations.register,
-};
-
-export default connect(null, mapDispatchToProps)(RegisterView);
+export default RegisterView;

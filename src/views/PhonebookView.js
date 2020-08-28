@@ -1,6 +1,6 @@
 // Base
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getLoading } from '../redux/phonebook/phonebook-selectors';
 
@@ -14,10 +14,14 @@ import Total from '../components/Total';
 import MainLoder from '../components/MainLoader';
 import { contactsOperations } from '../redux/phonebook';
 
-const PhonebookViews = ({ contacts, isLoadingContacts, fetchContacts }) => {
+const PhonebookViews = () => {
+  const contacts = useSelector(state => state.contacts.contacts);
+  const isLoadingContacts = useSelector(getLoading);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchContacts();
-  }, [fetchContacts]);
+    dispatch(contactsOperations.fetchContacts());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -44,13 +48,4 @@ PhonebookViews.propTypes = {
   ),
 };
 
-const mapStateToProps = state => ({
-  contacts: state.contacts.contacts,
-  isLoadingContacts: getLoading(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PhonebookViews);
+export default PhonebookViews;

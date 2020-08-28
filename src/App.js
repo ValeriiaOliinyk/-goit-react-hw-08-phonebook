@@ -1,11 +1,10 @@
 // Base
 import React, { useEffect, useRef, Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { authOperations } from './redux/auth';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authSelectors } from '../src/redux/auth';
 import notification from './notification/notification';
-import PropTypes from 'prop-types';
 
 // Components
 import Container from '../src/components/Container';
@@ -27,75 +26,45 @@ const LoginView = lazy(() =>
   import('../src/views/LoginView' /* webpackChunkName: "login-view" */),
 );
 
-const App = ({ onGetCurretnUser, errorMessage }) => {
-  // componentDidMount() {
-  //   const { onGetCurretnUser } = this.props;
-  //   onGetCurretnUser();
-  // }
-
-  // componentWillUnmount() {
-  //   let { errorMessage } = this.props;
-  //   errorMessage = '';
-  //   console.log(`Очистилось ${errorMessage}`);
-  // }
-
-  const clearErrorMessage = useRef('');
+export default function App() {
+  const dispatch = useDispatch();
+  let errorMessage = useSelector(authSelectors.getError);
+  errorMessage = useRef('');
 
   // Пофиксить
 
   useEffect(() => {
-    onGetCurretnUser();
+    dispatch(authOperations.getCurrentUser());
     return () => {
-      errorMessage = clearErrorMessage.current;
+      errorMessage.current = '';
       console.log(`Очистилось ${errorMessage}`);
     };
-  }, [errorMessage, onGetCurretnUser]);
+  }, [dispatch, errorMessage]);
 
   if (errorMessage) notification.showError();
+
   return (
     <Container>
       <AppBar />
       <Suspense fallback={<MainLoader />}>
         <Switch>
-          <Route exact path="/" component={HomeView} />
+          <PublicRoute exact path="/">
+            <HomeView />
+          </PublicRoute>
           <PublicRoute
             path="/register"
             restricted
             component={RegisterView}
             redirectTo="/"
           />
-          <PublicRoute
-            path="/login"
-            restricted
-            component={LoginView}
-            redirectTo="/contacts"
-          />
-          <PrivateRoute
-            path="/contacts"
-            component={PhonebookView}
-            redirectTo="/login"
-          />
+          <PublicRoute path="/login" restricted redirectTo="/contacts">
+            <LoginView />
+          </PublicRoute>
+          <PrivateRoute path="/contacts" redirectTo="/login">
+            <PhonebookView />
+          </PrivateRoute>
         </Switch>
       </Suspense>
     </Container>
   );
-};
-
-App.defaultProps = {
-  errorMessage: '',
-};
-
-App.propTypes = {
-  onGetCurretnUser: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string,
-};
-
-const mapStateToProps = state => ({
-  errorMessage: authSelectors.getError(state),
-});
-
-const mapDispatchToProps = {
-  onGetCurretnUser: authOperations.getCurrentUser,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+}
