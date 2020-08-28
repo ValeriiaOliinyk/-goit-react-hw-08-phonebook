@@ -41,7 +41,7 @@ export default function App() {
     };
   }, [dispatch, errorMessage]);
 
-  if (errorMessage) notification.showError();
+  if (errorMessage) console.log(!!errorMessage);
 
   return (
     <Container>
