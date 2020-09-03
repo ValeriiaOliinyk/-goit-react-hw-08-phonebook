@@ -1,5 +1,5 @@
 // Base
-import React, { useEffect, useRef, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { Switch } from 'react-router-dom';
 import { authOperations } from './redux/auth';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,19 +29,12 @@ const LoginView = lazy(() =>
 export default function App() {
   const dispatch = useDispatch();
   let errorMessage = useSelector(authSelectors.getError);
-  errorMessage = useRef('');
-
-  // Пофиксить
 
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
-    return () => {
-      errorMessage.current = '';
-      console.log(`Очистилось ${errorMessage}`);
-    };
-  }, [dispatch, errorMessage]);
+  }, [dispatch]);
 
-  if (errorMessage) console.log(!!errorMessage);
+  if (errorMessage) notification.showError();
 
   return (
     <Container>
